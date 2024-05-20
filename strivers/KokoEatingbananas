@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+#include<cmath>
+
+class Solution {
+public:
+    int findmax(vector<int> &v){
+        int n = v.size();
+        int maxi = INT_MIN;
+        for(int i = 0; i < n; i++){
+            maxi = max(maxi, v[i]);
+        }
+        return maxi;
+    }
+
+    long long TotalHours(vector<int> &v, int hour){
+        int n = v.size();
+        long long totalH = 0;
+
+        for(int i = 0; i < n; i++){
+            totalH += ceil((double)v[i]/(double)hour);
+        }
+        return totalH;
+    } 
+    int minEatingSpeed(vector<int>& piles, int h) {
+        int l = 1;
+        int hi = findmax(piles);
+
+        while(l <= hi){
+            int mid = (l+hi)/2;
+
+            long long hours = TotalHours(piles,mid);
+
+            if(hours <= h){
+                hi = mid - 1;
+            }
+            else{
+                l = mid+1;
+            }
+        }
+        return l;
+
+
+    }
+};
